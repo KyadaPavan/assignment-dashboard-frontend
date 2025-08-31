@@ -115,10 +115,6 @@ const PortfolioTable = ({ stocks }) => {
         header: "Portfolio %",
         cell: ({ getValue }) => `${getValue().toFixed(2)}%`,
       }),
-      columnHelper.accessor("latestEarnings", {
-        header: "Latest Earnings",
-        cell: ({ getValue }) => getValue() || "N/A",
-      }),
     ],
     [columnHelper]
   );
@@ -166,7 +162,7 @@ const PortfolioTable = ({ stocks }) => {
           <h3 className="text-lg font-semibold text-gray-900">
             Portfolio Holdings
           </h3>
-          <div className="relative">
+          <div className="relative hidden md:block">
             <Search className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
             <input
               type="text"

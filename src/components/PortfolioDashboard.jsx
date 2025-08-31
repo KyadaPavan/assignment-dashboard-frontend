@@ -113,8 +113,8 @@ const PortfolioDashboard = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <BarChart3 className="w-8 h-8 mr-3 text-primary-500" />
-              <h1 className="text-2xl font-bold text-gray-900">
+              <BarChart3 className="w-6 h-6 mr-3 md:w-8 md:h-8 text-primary-500" />
+              <h1 className="text-xl font-bold text-gray-900 md:text-2xl">
                 Portfolio Dashboard
               </h1>
             </div>
@@ -123,19 +123,37 @@ const PortfolioDashboard = () => {
               {lastUpdated && (
                 <div className="flex items-center text-sm text-gray-500">
                   <Clock className="w-4 h-4 mr-1" />
-                  {lastUpdated.toLocaleTimeString()}
+                  <span
+                    className={`${
+                      refreshing ? "text-green-600 font-medium" : ""
+                    }`}
+                  >
+                    {lastUpdated.toLocaleTimeString()}
+                  </span>
+                  {refreshing && (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="ml-2"
+                    >
+                      <RefreshCw className="w-3 h-3 text-green-500" />
+                    </motion.div>
+                  )}
                 </div>
               )}
 
               <button
                 onClick={toggleAutoRefresh}
-                className={`flex items-center px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                className={`hidden md:flex items-center px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   autoRefresh
                     ? "bg-primary-100 text-primary-700 border border-primary-200"
                     : "bg-gray-100 text-gray-600 border border-gray-200"
                 }`}
               >
-                <Activity className="w-4 h-4 mr-1" />
                 Auto-refresh {autoRefresh ? "ON" : "OFF"}
               </button>
             </div>
